@@ -45,8 +45,8 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="border-t border-border mt-16">
-        <div className="container mx-auto px-4 py-8 text-center text-muted-foreground">
+      <footer className="bg-black border-t border-black mt-16">
+        <div className="container mx-auto px-4 py-8 text-center text-white">
           <p>© 2024 TechStore. Todos os direitos reservados.</p>
         </div>
       </footer>

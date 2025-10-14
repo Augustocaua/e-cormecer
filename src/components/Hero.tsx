@@ -11,9 +11,9 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid gap-8 md:grid-cols-2 items-center">
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-foreground">
               Tecnologia que
-              <span className="block gradient-hero bg-clip-text text-transparent">
+              <span className="block text-primary">
                 Transforma Vidas
               </span>
             </h1>
