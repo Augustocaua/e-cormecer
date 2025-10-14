@@ -28,18 +28,22 @@ const Index = () => {
         <Categories />
         
         <section className="container mx-auto px-4 py-12">
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 animate-fade-in">
             <h2 className="text-3xl font-bold mb-2">Produtos em Destaque</h2>
             <p className="text-muted-foreground">Os melhores eletrônicos para você</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <ProductCard
+            {products.map((product, index) => (
+              <div
                 key={product.id}
-                product={product}
-                onAddToCart={handleAddToCart}
-              />
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <ProductCard
+                  product={product}
+                  onAddToCart={handleAddToCart}
+                />
+              </div>
             ))}
           </div>
         </section>

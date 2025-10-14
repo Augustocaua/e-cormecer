@@ -11,17 +11,17 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   return (
-    <Card className="group overflow-hidden transition-smooth hover:shadow-medium">
+    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-large hover:-translate-y-2 animate-fade-in-up">
       <CardHeader className="p-0">
         <Link to={`/product/${product.id}`}>
           <div className="relative aspect-square overflow-hidden bg-muted/30">
             <img
               src={product.image}
               alt={product.name}
-              className="h-full w-full object-cover transition-smooth group-hover:scale-105"
+              className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
             />
             {!product.inStock && (
-              <div className="absolute inset-0 flex items-center justify-center bg-background/80">
+              <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
                 <span className="text-sm font-semibold text-muted-foreground">Esgotado</span>
               </div>
             )}
@@ -31,14 +31,14 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 
       <CardContent className="p-4 space-y-2">
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
-          <Star className="h-3 w-3 fill-accent text-accent" />
+          <Star className="h-3 w-3 fill-accent text-accent animate-pulse" />
           <span className="font-medium">{product.rating}</span>
           <span className="mx-1">•</span>
           <span>{product.category}</span>
         </div>
 
         <Link to={`/product/${product.id}`}>
-          <h3 className="font-semibold text-lg transition-smooth hover:text-primary line-clamp-1">
+          <h3 className="font-semibold text-lg transition-all duration-300 group-hover:text-primary line-clamp-1">
             {product.name}
           </h3>
         </Link>
@@ -48,7 +48,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
         </p>
 
         <div className="pt-2">
-          <span className="text-2xl font-bold text-primary">
+          <span className="text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-105 inline-block">
             R$ {product.price.toFixed(2)}
           </span>
         </div>
@@ -57,7 +57,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
       <CardFooter className="p-4 pt-0">
         <Button
           variant="default"
-          className="w-full"
+          className="w-full transition-all duration-300 hover:scale-105"
           disabled={!product.inStock}
           onClick={() => onAddToCart?.(product)}
         >
