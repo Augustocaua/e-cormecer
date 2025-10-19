@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" aria-label="E-Commerce Logo">
+  <!-- Vector logo inspired by the provided image: headphones with a plug and E-COMMERCE text -->
+  <defs>
+    <style>
+      .purple { fill: #6B21A8; stroke: #6B21A8; }
+      .band { fill: none; stroke-width: 36; stroke-linecap: round; }
+      .text { font: 700 52px Arial, sans-serif; fill: #6B21A8; letter-spacing: 4px; }
+    </style>
+  </defs>
+
+  <!-- Headband -->
+  <path class="purple band" d="M 140 190 C 140 120 200 76 256 76 C 312 76 372 120 372 190"/>
+
+  <!-- Left earcup -->
+  <circle class="purple" cx="160" cy="260" r="52" />
+  <!-- Right earcup -->
+  <circle class="purple" cx="352" cy="260" r="52" />
+
+  <!-- Cable from right earcup -->
+  <path class="purple" d="M 380 280 C 420 300 420 340 400 362 C 380 384 340 384 340 420 C 340 442 356 456 380 456" fill="none" stroke="#6B21A8" stroke-width="16" stroke-linecap="round" />
+
+  <!-- Plug body -->
+  <rect class="purple" x="380" y="420" width="64" height="42" rx="8" ry="8" />
+  <!-- Plug prongs -->
+  <rect class="purple" x="396" y="390" width="12" height="28" rx="4" ry="4" />
+  <rect class="purple" x="428" y="390" width="12" height="28" rx="4" ry="4" />
+
+  <!-- Text -->
+  <text class="text" x="256" y="512" text-anchor="middle">E-COMMERCE</text>
+</svg>

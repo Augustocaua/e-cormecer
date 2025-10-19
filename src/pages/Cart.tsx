@@ -5,36 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trash2, ShoppingBag } from "lucide-react";
 import { CartItem } from "@/types/product";
+import { useCart } from "@/context/CartContext";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  // const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { items: cartItems, setQuantity, removeItem, subtotal } = useCart();
 
-  const updateQuantity = (id: string, newQuantity: number) => {
-    if (newQuantity === 0) {
-      removeItem(id);
-      return;
-    }
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
+  // removed local updateQuantity and removeItem; using context methods
 
-  const removeItem = (id: string) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  // Replace local subtotal with context subtotal
   const shipping = subtotal > 200 ? 0 : 29.90;
   const total = subtotal + shipping;
 
   return (
     <div className="min-h-screen bg-background">
-      <Header cartCount={cartItems.length} />
+      <Header />
 
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">Carrinho de Compras</h1>
@@ -93,9 +78,7 @@ const Cart = () => {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity - 1)
-                            }
+                            onClick={() => setQuantity(item.id, item.quantity - 1)}
                           >
                             -
                           </Button>
@@ -105,9 +88,7 @@ const Cart = () => {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity + 1)
-                            }
+                            onClick={() => setQuantity(item.id, item.quantity + 1)}
                           >
                             +
                           </Button>

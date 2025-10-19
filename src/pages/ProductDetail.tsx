@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { ShoppingCart, Star, ChevronLeft, Heart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useCart } from "@/context/CartContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === id);
-  const [cart, setCart] = useState<any[]>([]);
+  // const [cart, setCart] = useState<any[]>([]);
   const [quantity, setQuantity] = useState(1);
   const { toast } = useToast();
+  const { addItem } = useCart();
 
   if (!product) {
     return (
@@ -28,7 +30,7 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = () => {
-    setCart([...cart, { ...product, quantity }]);
+    addItem(product, quantity);
     toast({
       title: "Produto adicionado!",
       description: `${quantity}x ${product.name} adicionado ao carrinho.`,
@@ -37,7 +39,7 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header cartCount={cart.length} />
+      <Header />
 
       <main className="container mx-auto px-4 py-8">
         <Link to="/products" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-6 transition-smooth">
@@ -109,38 +111,13 @@ const ProductDetail = () => {
 
             <div className="flex items-center gap-4">
               <div className="flex items-center border border-border rounded-lg">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="h-12 w-12"
-                >
-                  -
-                </Button>
-                <span className="w-12 text-center font-medium">{quantity}</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="h-12 w-12"
-                >
-                  +
-                </Button>
+                <Button variant="ghost" size="sm" onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</Button>
+                <span className="w-8 text-center text-sm">{quantity}</span>
+                <Button variant="ghost" size="sm" onClick={() => setQuantity(quantity + 1)}>+</Button>
               </div>
-
-              <Button
-                variant="default"
-                size="lg"
-                className="flex-1"
-                onClick={handleAddToCart}
-                disabled={!product.inStock}
-              >
-                <ShoppingCart className="mr-2 h-5 w-5" />
+              <Button variant="default" onClick={handleAddToCart}>
+                <ShoppingCart className="mr-2 h-4 w-4" />
                 Adicionar ao Carrinho
-              </Button>
-
-              <Button variant="outline" size="icon" className="h-12 w-12">
-                <Heart className="h-5 w-5" />
               </Button>
             </div>
 

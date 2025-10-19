@@ -6,11 +6,13 @@ import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { SlidersHorizontal } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const Products = () => {
-  const [cart, setCart] = useState<Product[]>([]);
+  // const [cart, setCart] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
   const { toast } = useToast();
+  const { addItem } = useCart();
 
   const categories = ["Todos", "Audio", "Acessórios", "Carregadores"];
 
@@ -19,7 +21,7 @@ const Products = () => {
     : products.filter(p => p.category === selectedCategory);
 
   const handleAddToCart = (product: Product) => {
-    setCart([...cart, product]);
+    addItem(product);
     toast({
       title: "Produto adicionado!",
       description: `${product.name} foi adicionado ao carrinho.`,
@@ -28,7 +30,7 @@ const Products = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header cartCount={cart.length} />
+      <Header />
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">

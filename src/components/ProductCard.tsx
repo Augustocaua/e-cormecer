@@ -7,18 +7,25 @@ import { Link } from "react-router-dom";
 interface ProductCardProps {
   product: Product;
   onAddToCart?: (product: Product) => void;
+  imageFit?: "cover" | "contain";
+  imageAspect?: "square" | "4/3" | "3/2";
 }
 
-const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
+const ProductCard = ({ product, onAddToCart, imageFit = "contain", imageAspect = "square" }: ProductCardProps) => {
+  const aspectClass = imageAspect === "4/3" ? "aspect-[4/3]" : imageAspect === "3/2" ? "aspect-[3/2]" : "aspect-square";
+  const objectClass = imageFit === "cover" ? "object-cover" : "object-contain";
+
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-large hover:-translate-y-2 animate-fade-in-up">
+    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-large hover:-translate-y-2">
       <CardHeader className="p-0">
         <Link to={`/product/${product.id}`}>
-          <div className="relative aspect-square overflow-hidden bg-muted/30">
+          <div className={`relative ${aspectClass} overflow-hidden bg-muted/30`}>
             <img
               src={product.image}
               alt={product.name}
-              className="h-full w-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-1"
+              className={`absolute inset-0 h-full w-full ${objectClass} transition-all duration-500 group-hover:scale-105`}
+              loading="lazy"
+              decoding="async"
             />
             {!product.inStock && (
               <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
@@ -31,7 +38,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
 
       <CardContent className="p-4 space-y-2">
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
-          <Star className="h-3 w-3 fill-accent text-accent animate-pulse" />
+          <Star className="h-3 w-3 fill-accent text-accent" />
           <span className="font-medium">{product.rating}</span>
           <span className="mx-1">•</span>
           <span>{product.category}</span>
